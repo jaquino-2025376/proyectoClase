@@ -1,1 +1,20 @@
-Buenas tardes profesor Eduardo Hor, le hago entrega de mi CRUD en el proyecto que es para el día viernes 6 de febrero de 2026
+Buenas tardes profesor Eduardo Hor, le hago entrega de mi CRUD en el proyecto que es para el día viernes 6 de febrero de 2026   
+
+# CRUD Empleados
+
+## Descripción
+API REST para la gestión de empleados.
+
+## Tecnologías
+- Java
+- Spring Boot
+- MySQL
+
+## Endpoints
+- GET /api/empleados
+- POST /api/empleados
+- PUT /api/empleados/{id}
+- DELETE /api/empleados/{id}
+
+## Postman
+Colección incluida en el repositorio.
