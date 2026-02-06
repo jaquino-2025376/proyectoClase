@@ -17,4 +17,4 @@ API REST para la gestión de empleados.
 - DELETE /api/empleados/{id}
 
 ## Postman
-Colección incluida en el repositorio.
+Link de colección: https://jaquino-2025376-2259786.postman.co/workspace/Rodrigo-Aquino's-Workspace~cbd42751-64f3-4ad1-8e63-ac4cdc38b8ed/request/52104029-ed5ee19a-2c2f-43cd-b2c3-9e27423cd979?action=share&creator=52104029&ctx=documentation
