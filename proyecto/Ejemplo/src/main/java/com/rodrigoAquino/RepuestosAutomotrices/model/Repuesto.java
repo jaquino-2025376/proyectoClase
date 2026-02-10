@@ -22,8 +22,6 @@ public class Repuesto {
     @Column(name = "precio_venta")
     private Float precioVenta;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proveedor")
     private Integer idProveedor;
 
