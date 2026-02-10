@@ -1,6 +1,5 @@
 package com.rodrigoAquino.RepuestosAutomotrices.service;
 
-import com.rodrigoAquino.RepuestosAutomotrices.model.Empleado;
 import com.rodrigoAquino.RepuestosAutomotrices.model.Proveedor;
 import com.rodrigoAquino.RepuestosAutomotrices.repository.ProveedorRepository;
 import org.springframework.stereotype.Service;
