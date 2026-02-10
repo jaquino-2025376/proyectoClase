@@ -1,4 +1,4 @@
-    package com.rodrigoAquino.RepuestosAutomotrices.Controller;
+    package com.rodrigoAquino.RepuestosAutomotrices.controller;
 
     import com.rodrigoAquino.RepuestosAutomotrices.model.Empleado;
     import com.rodrigoAquino.RepuestosAutomotrices.service.EmpleadoService;

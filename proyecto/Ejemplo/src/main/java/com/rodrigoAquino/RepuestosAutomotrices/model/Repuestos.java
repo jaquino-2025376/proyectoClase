@@ -69,7 +69,7 @@ public class Repuestos {
     public void setPrecioVenta(Float precioVenta) {
         this.precioVenta = precioVenta;
     }
-    
+
 
     public Integer getIdProveedor() {
         return idProveedor;

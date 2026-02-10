@@ -1,7 +1,6 @@
-package com.rodrigoAquino.RepuestosAutomotrices.Controller;
+package com.rodrigoAquino.RepuestosAutomotrices.controller;
 
 
-import com.rodrigoAquino.RepuestosAutomotrices.model.Empleado;
 import com.rodrigoAquino.RepuestosAutomotrices.model.Proveedor;
 import com.rodrigoAquino.RepuestosAutomotrices.service.ProveedorService;
 import jakarta.validation.Valid;
