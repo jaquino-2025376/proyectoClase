@@ -50,7 +50,7 @@ public class RepuestoController {
             repuestoService.deleteRepuesto(id);
             return ResponseEntity.ok("El repuesto fue eliminado con éxito: " + id);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo eliminar el proveedor: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo eliminar el repuesto: " + e.getMessage());
         }
     }
 }
