@@ -2,9 +2,11 @@ package com.rodrigoAquino.RepuestosAutomotrices.service;
 
 import com.rodrigoAquino.RepuestosAutomotrices.model.Venta;
 import com.rodrigoAquino.RepuestosAutomotrices.repository.VentaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class VentaServiceImplements implements VentaService{
     private final VentaRepository ventaRepository;
 

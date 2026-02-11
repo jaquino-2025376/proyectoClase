@@ -10,5 +10,5 @@ public interface VentaService {
     Venta getVentaById(Integer id);
     Venta saveVenta(Venta venta) throws RuntimeException;
     Venta updateVenta(Integer id, Venta venta);
-    void deleteVenta(Integer id)
+    void deleteVenta(Integer id);
 }
