@@ -49,10 +49,11 @@
             try {
                 Empleado updateEmpleado = empleadoService.updateEmpleado(id, empleado);
                 return ResponseEntity.ok(updateEmpleado);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e){
                 return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
+
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Object>deleteEmpleado (@PathVariable Integer id){
