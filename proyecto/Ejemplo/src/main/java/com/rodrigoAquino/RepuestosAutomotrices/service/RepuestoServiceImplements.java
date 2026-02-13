@@ -5,6 +5,7 @@ import com.rodrigoAquino.RepuestosAutomotrices.repository.RepuestoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RepuestoServiceImplements implements RepuestoService  {
@@ -20,27 +21,40 @@ public class RepuestoServiceImplements implements RepuestoService  {
     }
 
     @Override
-    public Repuesto getRepuestoById(Integer Id){
-        return repuestoRepository.findById(Id).orElse(null);
+    public Repuesto getRepuestoById(Integer id){
+        return repuestoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Repuesto no encontrado"));
     }
 
+
     @Override
-    public Repuesto saveRepuesto(Repuesto repuesto) throws RuntimeException{
+    public Repuesto saveRepuesto(Repuesto repuesto) {
+        Optional<Repuesto> repuestoExistente = repuestoRepository.findByNombreRepuesto(repuesto.getNombreRepuesto());
+        if (repuestoExistente.isPresent()) {
+            throw new IllegalArgumentException("Ya existe un repuesto con ese nombre");
+        }
         return repuestoRepository.save(repuesto);
     }
 
+
     @Override
     public Repuesto updateRepuesto(Integer id, Repuesto repuestoDetalles) {
-        Repuesto repuestoExistente = repuestoRepository.findById(id).orElse(null);
-        if (repuestoExistente != null){
-            repuestoExistente.setNombreRepuesto(repuestoDetalles.getNombreRepuesto());
-            repuestoExistente.setCategoriaRepuesto(repuestoDetalles.getCategoriaRepuesto());
-            repuestoExistente.setPrecioCompra(repuestoDetalles.getPrecioCompra());
-            repuestoExistente.setIdProveedor(repuestoDetalles.getIdProveedor());
-            return repuestoRepository.save(repuestoExistente);
+        Repuesto repuestoExistente = repuestoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Repuesto no encontrado"));
+        boolean sinCambios =
+                repuestoExistente.getNombreRepuesto().equals(repuestoDetalles.getNombreRepuesto()) &&
+                        repuestoExistente.getCategoriaRepuesto().equals(repuestoDetalles.getCategoriaRepuesto()) &&
+                        repuestoExistente.getPrecioCompra().equals(repuestoDetalles.getPrecioCompra()) &&
+                        repuestoExistente.getIdProveedor().equals(repuestoDetalles.getIdProveedor());
+        if (sinCambios) {
+            throw new IllegalArgumentException("No hay cambios para actualizar");
         }
-        return null;
+        repuestoExistente.setNombreRepuesto(repuestoDetalles.getNombreRepuesto());
+        repuestoExistente.setCategoriaRepuesto(repuestoDetalles.getCategoriaRepuesto());
+        repuestoExistente.setPrecioCompra(repuestoDetalles.getPrecioCompra());
+        repuestoExistente.setIdProveedor(repuestoDetalles.getIdProveedor());
+
+        return repuestoRepository.save(repuestoExistente);
     }
+
 
     @Override
     public void deleteRepuesto(Integer id) {
