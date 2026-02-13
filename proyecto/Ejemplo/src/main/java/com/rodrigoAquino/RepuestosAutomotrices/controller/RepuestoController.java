@@ -27,12 +27,26 @@ public class RepuestoController {
     @PostMapping
     public ResponseEntity<Object> createRepuesto(@Valid @RequestBody Repuesto repuesto) {
         try {
+            if (repuesto.getNombreRepuesto() == null || repuesto.getNombreRepuesto().isEmpty()) {
+                return ResponseEntity.badRequest().body("El nombre del repuesto no puede estar vacío");
+            }
+            if (repuesto.getPrecioCompra() == null || repuesto.getPrecioCompra() <= 0) {
+                return ResponseEntity.badRequest().body("El precio debe ser mayor a 0");
+            }
+            if (repuesto.getPrecioVenta() == null || repuesto.getPrecioVenta() < 0) {
+                return ResponseEntity.badRequest().body("El precio de la venta debe ser mayor a 0");
+            }
+            if (repuesto.getCategoriaRepuesto() == null || repuesto.getCategoriaRepuesto().isEmpty()){
+                return ResponseEntity.badRequest().body("El repuesto debe tener una categoría");
+            }
             Repuesto createdRepuesto = repuestoService.saveRepuesto(repuesto);
             return new ResponseEntity<>(createdRepuesto, HttpStatus.CREATED);
+
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateRepuesto(@PathVariable Integer id, @Valid @RequestBody Repuesto repuesto) {
