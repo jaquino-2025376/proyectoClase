@@ -24,6 +24,15 @@ public class ProveedorController {
     @PostMapping
     public ResponseEntity<Object> createProveedor(@Valid @RequestBody Proveedor proveedor) {
         try {
+            if (proveedor.getNombreProveedor() == null || proveedor.getNombreProveedor().isEmpty()){
+                return ResponseEntity.badRequest().body("El nombre del proveedor no puede estar vacío");
+            }
+            if (proveedor.getEmailProveedor()== null || proveedor.getEmailProveedor().isEmpty()){
+                return ResponseEntity.badRequest().body("El email del proveedor no puede estar vacío");
+            }
+            if (proveedor.getDireccion() == null || proveedor.getDireccion().isEmpty()){
+                return ResponseEntity.badRequest().body("La dirección del proveedor no puede estar vacía");
+            }
             Proveedor createdProveedor = proveedorService.saveProveedor(proveedor);
             return new ResponseEntity<>(createdProveedor, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
