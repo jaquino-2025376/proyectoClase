@@ -5,6 +5,7 @@ import com.rodrigoAquino.RepuestosAutomotrices.repository.ProveedorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProveedorServiceImplements implements ProveedorService {
@@ -21,25 +22,36 @@ public class ProveedorServiceImplements implements ProveedorService {
 
     @Override
     public Proveedor getProveedorById(Integer Id) {
-        return proveedorRepository.findById(Id).orElse(null);
+        return proveedorRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Proveedor no encontrado"));
     }
 
     @Override
     public Proveedor saveProveedor(Proveedor proveedor) throws RuntimeException {
+        Optional<Proveedor> proveedorExistente =
+                proveedorRepository.findByNombreAndEmailProveedor(proveedor.getNombreProveedor(), proveedor.getEmailProveedor());
+        if(proveedorExistente.isPresent()){
+            throw new IllegalArgumentException("Ya existe un proveedor con ese nombre y correo electronico");
+        }
         return proveedorRepository.save(proveedor);
     }
 
     @Override
     public Proveedor updateProveedor(Integer id, Proveedor proveedorDetalles) {
-        Proveedor proveedorExistente = proveedorRepository.findById(id).orElse(null);
+        Proveedor proveedorExistente = proveedorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Proveedor no encontrado"));
+        boolean sinCambios =
+                proveedorExistente.getNombreProveedor().equals(proveedorDetalles.getNombreProveedor()) &&
+                        proveedorExistente.getEmailProveedor().equals(proveedorDetalles.getEmailProveedor()) &&
+                        proveedorExistente.getTelefonoProveedor().equals(proveedorDetalles.getTelefonoProveedor()) &&
+                        proveedorExistente.getDireccion().equals(proveedorDetalles.getDireccion());
+
         if (proveedorExistente != null) {
+            throw new IllegalArgumentException("No hay cambios para actualizar");
+        }
             proveedorExistente.setNombreProveedor(proveedorDetalles.getNombreProveedor());
             proveedorExistente.setTelefonoProveedor(proveedorDetalles.getTelefonoProveedor());
             proveedorExistente.setDireccion(proveedorDetalles.getDireccion());
             proveedorExistente.setEmailProveedor(proveedorDetalles.getEmailProveedor());
             return proveedorRepository.save(proveedorExistente);
-        }
-        return null;
     }
 
     @Override
