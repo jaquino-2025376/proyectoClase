@@ -27,12 +27,22 @@
         @PostMapping
         public ResponseEntity<Object> createEmpleado(@Valid @RequestBody Empleado empleado) {
             try {
+                if (empleado.getNombreEmpleado() == null || empleado.getNombreEmpleado().isEmpty()) {
+                    return ResponseEntity.badRequest().body("El nombre no puede estar vacío");
+                }
+                if (empleado.getApellidoEmpleado() == null || empleado.getApellidoEmpleado().isEmpty()){
+                    return ResponseEntity.badRequest().body("El apellido no puede estar vacío");
+                }
+                if(empleado.getPuestoEmpleado() == null || empleado.getPuestoEmpleado().isEmpty()){
+                    return ResponseEntity.badRequest().body("El empleado debe de tener un puesto");
+                }
                 Empleado createdEmpleado = empleadoService.saveEmpleado(empleado);
                 return new ResponseEntity<>(createdEmpleado, HttpStatus.CREATED);
             } catch (IllegalArgumentException e) {
                 return ResponseEntity.badRequest().body(e.getMessage());
             }
         }
+
 
         @PutMapping("/{id}")
         public ResponseEntity<Object> updateEmpleado (@PathVariable Integer id, @Valid @RequestBody Empleado empleado){

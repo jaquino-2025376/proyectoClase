@@ -1,6 +1,8 @@
 package com.rodrigoAquino.RepuestosAutomotrices.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Empleados" )
@@ -19,6 +21,7 @@ public class Empleado {
     @Column(name = "puesto_empleado")
     private String puestoEmpleado;
 
+    @Email
     @Column(name = "email_empleado")
     private String emailEmpleado;
 
