@@ -28,7 +28,7 @@ public class ProveedorServiceImplements implements ProveedorService {
     @Override
     public Proveedor saveProveedor(Proveedor proveedor) throws RuntimeException {
         Optional<Proveedor> proveedorExistente =
-                proveedorRepository.findByNombreAndEmailProveedor(proveedor.getNombreProveedor(), proveedor.getEmailProveedor());
+                proveedorRepository.findByNombreProveedorAndEmailProveedor(proveedor.getNombreProveedor(), proveedor.getEmailProveedor());
         if(proveedorExistente.isPresent()){
             throw new IllegalArgumentException("Ya existe un proveedor con ese nombre y correo electronico");
         }
